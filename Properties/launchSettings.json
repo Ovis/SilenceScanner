@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "SilenceScanner": {
-      "commandName": "Project",
-      "commandLineArgs": "\"D:\\Ripping\\_NonCheck\""
-    }
-  }
-}

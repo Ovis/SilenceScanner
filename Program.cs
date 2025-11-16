@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -19,10 +20,22 @@ class Program
 
     static void Main(string[] args)
     {
+        // バージョン表示
+        if (args.Length > 0 && (args[0] == "--version" || args[0] == "-v"))
+        {
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var versionString = version != null ? $"{version.Major}.{version.Minor}.{version.Build}" : "1.0.0";
+            Console.WriteLine($"SilenceScanner version {versionString}");
+            Console.WriteLine("Copyright (c) 2025 Ovis");
+            Console.WriteLine("Licensed under the MIT License");
+            return;
+        }
+
         if (args.Length < 1)
         {
             Console.Error.WriteLine(
                 "usage: ./SilenceScanner -- <folder> [--silence 2.0] [--thresh -60] [--hpf 70] [--edgeeps 0.02] [--genre \"Soundtrack\"] [--out result.tsv] [--showmax 10]");
+            Console.Error.WriteLine("       ./SilenceScanner --version  # Show version information");
             return;
         }
 
